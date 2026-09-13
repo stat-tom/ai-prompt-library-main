@@ -1,0 +1,268 @@
+<dependencies>
+
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j-open-ai</artifactId>
+        <version>0.31.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>dev.langchain4j</groupId>
+        <artifactId>langchain4j</artifactId>
+        <version>0.31.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>2.2.224</version>
+    </dependency>
+
+</dependencies>
+
+public class DataAssistant {
+    public static void main(String[] args) {
+    }
+}
+
+public class DataAssistant {
+
+    static interface DataAssistantService {
+        String sendPrompt(String userPrompt);
+    }
+
+    public static void main(String[] args) {
+
+        OpenAiChatModel model = OpenAiChatModel
+                .builder()
+                .apiKey("TUTAJ-KLUCZ-API")
+                .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
+                .build();
+ 
+        DataAssistantService dataAssistantChat = AiServices.builder(DataAssistantService.class)
+                .chatLanguageModel(model)
+                .build();
+
+        String response = dataAssistantChat.sendPrompt("Cześć, czy możesz się przedstawić?");
+        System.out.printf(response);
+    }
+}
+
+public class DataAssistantTools {
+
+    @Tool("Tworzy rekordy pokoju")
+    public void createRooms(@P("Liczba rekordów pokoju do utworzenia ") int count) {
+        System.out.println("Chcesz, żebym utworzył następującą liczbę pokojów." + count);
+    }
+
+    @Tool("Tworzy rekordy rezerwacji ")
+    public void createBookings(@P("Liczba rekordów rezerwacji do utworzenia to") int count) {
+        System.out.println("Chcesz, żebym utworzył następującą liczbę rezerwacji: " + count);
+    }
+
+    @Tool("Pokazuje wyniki z bazy danych ")
+    public void displayDatabase() {
+        System.out.println("Następnie pokażę bieżące informacje o bazie danych");
+    }
+}
+
+DataAssistantService dataAssistantChat = AiServices.builder(DataAssistantService.class)
+                .chatLanguageModel(model)
+
+                .tools(new DataAssistantTools())
+                .build();
+    while(true){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Czego potrzebujesz?");
+        String query = scanner.nextLine();
+        String response = dataAssistantChat.sendPrompt(query);
+        System.out.println(response);
+    }
+
+Czy możesz utworzyć 4 pokoje i 2 rezerwacje i powiedzieć mi, co jest w bazie danych?
+
+Czy możesz powiedzieć mi, co znajduje się obecnie w bazie danych
+
+public class QueryTools {
+
+    private final Connection connection;
+
+    public QueryTools() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:h2:mem:testdb");
+        Statement st = connection.createStatement();
+        st.executeUpdate("""
+            CREATE TABLE BOOKINGS (
+                bookingid int NOT NULL AUTO_INCREMENT,
+                roomid int,
+                firstname varchar(255),
+                lastname varchar(255),
+                depositpaid boolean,
+                checkin date,
+                checkout date,
+                primary key (bookingid)
+             );
+            CREATE TABLE ROOMS (
+                roomid int NOT NULL AUTO_INCREMENT,
+                room_name varchar(255),
+                type varchar(255),
+                beds int,
+                accessible boolean,
+                image varchar(2000),
+                description varchar(2000),
+                features varchar(100) ARRAY,
+                roomPrice int,
+                primary key (roomid)
+            );
+        """);
+    }
+
+    public void createRoom() throws SQLException {
+        Statement st = connection.createStatement();
+        st.executeUpdate("""
+            INSERT INTO ROOMS (room_name, type, beds, accessible, image, description, features, roomPrice)
+            VALUES (
+                '101',
+                'single',
+                1,
+                true,
+                '/images/room2.jpg',
+                'A generated description',
+                ARRAY['TV', 'WiFi', 'Safe'],
+                100);
+        """);
+    }
+
+    public void createBooking() throws SQLException {
+        Statement st = connection.createStatement();
+        st.executeUpdate("""
+            INSERT INTO BOOKINGS (roomid, firstname, lastname, depositpaid, checkin, checkout)
+            VALUES (
+                1,
+                'James',
+                'Dean',
+                true,
+                '2022-02-01',
+                '2022-02-05'
+            );
+        """);
+    }
+
+    public void outputTables(String query) throws SQLException {
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        ResultSetMetaData rsmd = rs.getMetaData();
+
+        int columnsNumber = rsmd.getColumnCount();
+        while (rs.next()) {
+            for(int i = 1 ; i <= columnsNumber; i++){
+                System.out.print(rs.getString(i) + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class DataAssistantTools [
+
+    QueryTools queryTools = new QueryTools();
+
+    public DataAssistantTools() throws SQLException {
+    }
+
+    @Tool("Tworzy rekordy pokojów")
+    public void createRooms(@P("Liczba rekordów pokojów do utworzenia ") int count) throws SQLException {
+        for(int i = 1; i <= count; i++){
+            queryTools.createRoom();
+        }
+    }
+
+    @Tool("Tworzy rekordy rezerwacji")
+    public void createBookings(@P("Liczba rekordów rezerwacji do utworzenia") int count) throws SQLException {
+        for(int i = 1; i <= count; i++){
+            queryTools.createBooking();
+        }
+    }
+
+    @Tool("Pokazuje wyniki z bazy danych")
+    public void displayDatabase() throws SQLException {
+
+        System.out.println("Bieżący stan tabeli ROOMS:");
+        queryTools.outputTables("SELECT * FROM ROOMS");
+
+        System.out.println("Bieżący stan tabeli BOOKINGS:");
+        queryTools.outputTables("SELECT * FROM BOOKINGS");
+    }
+}
+
+public static void main(String[] args) throws SQLException {
+
+        OpenAiChatModel model = OpenAiChatModel
+                .builder()
+                .apiKey("TUTAJ-KLUCZ-API")
+                .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
+                .build();
+
+        DataAssistantService dataAssistantChat = AiServices.builder(DataAssistantService.class)
+                .chatLanguageModel(model)
+                .tools(new DataAssistantTools())
+                .build();
+
+        while(true){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Czego potrzebujesz?");
+            String query = scanner.nextLine();
+            String response = dataAssistantChat.sendPrompt(query);
+            System.out.println(response);
+        }
+    }
+
+Utwórz 2 pokoje i 3 rezerwacje
+
+Pokaż mi zawartość bazy danych
+
+public int getRoomId() throws SQLException
+    Statement st = connection.createStatement();
+    ResultSet rs = st.executeQuery("SELECT roomid FROM ROOMS ORDER BY roomid DESC");
+
+    if(rs.next()){
+        return rs.getInt("roomid");
+    } else {
+        return 0;
+    }
+}
+
+@Tool("Pobiera najnowszy identyfikator roomid z bazy danych po utworzeniu pokojów")
+public int getRoomId() throws SQLException {
+    return queryTools.getRoomId();
+}
+
+@Tool("Tworzy rekordy rezerwacji")
+public void createBookings(@P("Liczba rekordów rezerwacji do utworzenia ") int count, @P("Najnowszy roomid") int roomid) throws SQLException {
+    System.out.println("Utworzę rezerwacje dla pokoju: " + roomid);
+    for(int i = 1; i <= count; i++){
+        queryTools.createBooking(roomid);
+    }
+}
+
+public void createBooking(int roomid) throws SQLException
+    Statement st = connection.createStatement();
+    st.executeUpdate("""
+            INSERT INTO BOOKINGS (roomid, firstname, lastname, depositpaid, checkin, checkout)
+            VALUES (
+                ?,
+                'James',
+                'Dean',
+                true,
+                '2022-02-01',
+                '2022-02-05'
+            );
+        """.replace("?", Integer.toString(roomid)));
+}
+
+Utwórz trzy pokoje
+Pokaż zawartość bazy danych
+Utwórz trzy rezerwacje
+
+Utwórz kolejne trzy pokoje
+Utwórz kolejne trzy rezerwacje
+Pokaż zawartość bazy danych

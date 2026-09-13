@@ -1,0 +1,47 @@
+Poniżej znajduje się instrukcja opisująca zadanie z towarzyszącymi jej danymi wejściowymi, które dostarczają dodatkowego kontekstu. Napisz odpowiedź, która odpowiednio realizuje to żądanie.
+### Instrukcja:
+{instruction}
+### Dane wejściowe:
+{input}
+### Odpowiedź:
+
+Poniżej znajduje się instrukcja, która opisujące zadanie. Napisz odpowiedź, która odpowiednio realizuje to żądanie.
+### Instrukcja:
+{instruction}
+### Odpowiedź:
+
+Poniżej znajduje się instrukcja, ograniczona trzema haszami, która zadaje pytanie dotyczące bazy kodu restful-booker-platform. Podaj niezbędny kod, aby odpowiedzieć na to pytanie. Przed wypisaniem kodu upewnij się, że kompiluje się on poprawnie.
+###
+{instruction}
+###
+
+Poniżej znajduje się instrukcja, ograniczona trzema haszami, która zadaje pytanie dotyczące bazy kodu restful-booker-platform. Podaj niezbędny kod, aby odpowiedzieć na to pytanie. Przed wypisaniem kodu upewnij się, że kompiluje się on poprawnie.
+###
+Jak działa metoda initialiseMocks w klasie BrandingServiceTest?
+###
+
+datasets:
+- path: 2bittester/rbp-data-set
+  type: alpaca
+
+base_model: NousResearch/Llama-2-7b-hf
+---
+tokenizer_type: LlamaTokenizer
+
+sample_packing: false
+num_epochs: 4
+
+CUDA_VISIBLE_DEVICES="" python -m axolotl.cli.preprocess examples/llama-2/lora.yml
+
+accelerate launch -m axolotl.cli.train examples/llama-2/lora.yml
+
+accelerate launch -m axolotl.cli.inference examples/llama-2/lora.yml --lora_model_dir="./lora-out" –gradio
+
+Jak działa metoda initialiseMocks w klasie BrandingServiceTest?
+
+Poniżej znajduje się instrukcja opisująca zadanie. Napisz odpowiedź, która odpowiednio realizuje to żądanie.
+### Instrukcja:
+Jak działa metoda initialiseMocks w klasie BrandingServiceTest?
+### Odpowiedź:
+
+Jakie adnotacje znajdują się w klasie Javy BrandingResult?

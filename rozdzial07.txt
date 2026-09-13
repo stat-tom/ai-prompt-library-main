@@ -1,0 +1,137 @@
+Wciel się w rolę automatyzatora testów i utwórz zautomatyzowany test przy użyciu Selenium i Javy, który automatyzuje i weryfikuje proces logowania do aplikacji.
+
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.9.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.9.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>5.5.3</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+private static WebDriver driver;
+// Use WebDriverManager to download the driver binaries
+// and start the browser server for us.
+driver = new ChromeDriver();
+@AfterAll
+@Test
+public void testMessageIsCreated() {
+    driver.get("https://automationintesting.online");
+}
+
+Jesteś ekspertem w programowaniu w Javie. Przekształć kod HTML ograniczony trzema haszami w obiekt strony Java Selenium z użyciem biblioteki PageFactory i adnotacji @FindBy.
+###
+<Tutaj wprowadź HTML>
+###
+<form>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span class="fa fa-id-card"></span>
+      </span>
+    </div>
+    <input type="text" data-testid="ContactName" class="form-control" placeholder="Name" aria-label="Name" id="name" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span class="fa fa-envelope"></span>
+      </span>
+    </div>
+    <input type="text" data-testid="ContactEmail" class="form-control" placeholder="Email" aria-label="Email" id="email" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span class="fa fa-phone"></span>
+      </span>
+    </div>
+    <input type="text" data-testid="ContactPhone" class="form-control" placeholder="Phone" aria-label="Phone" id="phone" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">
+        <span class="fa fa-envelope"></span>
+      </span>
+    </div>
+    <input type="text" data-testid="ContactSubject" class="form-control" placeholder="Subject" aria-label="Subject" id="subject" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Message</span>
+    </div>
+    <textarea data-testid="ContactDescription" class="form-control" aria-label="Description" id="description" rows="5"></textarea>
+  </div>
+  <br>
+  <button type="button" class="btn btn-outline-primary float-right" id="submitContact">Submit</button>
+</form>
+
+ContactFormPage contactFormPage = new ContactFormPage(driver);
+contactFormPage.enterName("John Smith");
+contactFormPage.enterEmail("test@email.com");
+contactFormPage.enterPhone("0123456789");
+contactFormPage.enterSubject("Testing");
+contactFormPage.enterDescription("This is a test message");
+contactFormPage.clickSubmitButton();
+
+Wykonaj ponownie poprzednie polecenie, ale tym razem użyj następującego kodu HTML:
+<div class="col-sm-4">
+    <div class="form-group">
+        <input data-testid="username" type="text" style="border: 1px solid grey;" class="form-control" id="username" placeholder="Username">
+    </div>
+    <div class="form-group">
+        <input data-testid="password" type="password" style="border: 1px solid grey;" class="form-control" id="password" placeholder="Password">
+    </div>
+    <button type="submit" data-testid="submit" id="doLogin" class="btn btn-primary float-right">Login</button>
+</div>
+
+
+Ponownie wykonaj polecenie, tym razem potrzebuję metody, która zwraca liczbę wiadomości:
+<div class="messages">
+    <div class="row">
+        <div class="col-sm-2 rowHeader">
+            <p>Name</p>
+        </div>
+        <div class="col-sm-9 rowHeader">
+            <p>Subject</p>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row detail read-false" id="message0">
+        <div class="col-sm-2" data-testid="message0">
+            <p>James Dean</p>
+        </div>
+        <div class="col-sm-9" data-testid="messageDescription0">
+            <p>Booking enquiry</p>
+        </div>
+        <div class="col-sm-1">
+            <span data-testid="DeleteMessage0" class="fa fa-remove roomDelete"></span>
+        </div>
+    </div>
+</div>
+
+Czy możesz poprawić klasę MessagePage tak, aby czekała na wczytanie listy wiadomości?
+
+Utwórz zautomatyzowany test formularza kontaktowego i sprawdź, czy wiadomość została pomyślnie utworzona
+
+###
+curl 'https://automationintesting.online/message/' -X POST -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"name":"Mark","email":"test@test.com", "phone":"071234567890","subject":"This is a test message", "description":"This allows me to create a message rapidly"}'
+###
+
+Jakie zależności są wymagane dla tej metody?
+
+Utwórz POJO dla MessagePayload, łącznie z konstruktorem i metodami dostępowymi (getterami i setterami)
+
+Zaproponuj sposoby ulepszenia tego zautomatyzowanego testu, aby był bardziej stabilny i niezawodny

@@ -1,0 +1,97 @@
+Eksploruj rezerwację lotów z użyciem różnych dostawców, aby odkryć, czy wszyscy dostawcy są wyświetlani w wynikach wyszukiwania
+
+Jesteś profesjonalnym testerem oprogramowania. Otrzymasz historyjkę użytkownika ograniczoną trzema haszami znakami oraz listę zidentyfikowanych zagrożeń ograniczoną trzema odwrotnymi apostrofami. Przeanalizuj historyjkę użytkownika i rozszerz listy zagrożeń.
+Upewnij się, że wygenerowane zagrożenia nie są duplikatami pierwotnych zagrożeń i że odnoszą się do następujących cech jakościowych: użyteczności i dokładności.
+###
+<Tutaj dodajemy historyjkę użytkownika>
+###
+```
+-	Rezerwacje nie są wyświetlane w widoku raportu.
+-	Widok raportu jest mało czytelny.
+-	Elementy nawigacyjne nie działają prawidłowo.
+-	Administratorzy nie mogą dokonywać rezerwacji.
+```
+
+Jesteś profesjonalnym testerem oprogramowania. Przeanalizuj karty testów eksploracyjnych ograniczone trzema haszami i zaproponuj dodatkowe karty.
+Zanim wypiszesz wygenerowane karty, sprawdź, czy nie są duplikatami pierwotnych kart i czy odnoszą się do następujących cech jakościowych: użyteczność i dokładność.
+###
+Eksploruj, jak rezerwacje są renderowane w widoku raportu
+Z użyciem zbioru rezerwacji
+Aby odkryć, czy wszystkie rezerwacje są wyświetlane poprawnie.
+
+Eksploruj, jak rezerwacje są renderowane w widoku raportu
+Z użyciem bardzo dużego zbioru rezerwacji
+Aby odkryć, czy duża liczba rezerwacji jest czytelna
+
+Eksploruj nawigację po widoku raportu
+Z użyciem zbioru rezerwacji
+Aby odkryć, czy elementy nawigacyjne działają zgodnie z oczekiwaniami
+
+Eksploruj dokonywanie rezerwacji
+Z użyciem formularza rezerwacji dla administratora
+Aby odkryć, czy administrator może dokonywać rezerwacji
+
+Eksploruj korzystanie z podstawowych funkcji widoku raportu
+Z użyciem różnych person
+Aby odkryć, czy funkcje raportu są zrozumiałe
+
+Eksploruj różne komunikaty o błędach w formularzu administracyjnym
+Z użyciem błędnie uformowanych danych i narzędzi proxy
+Aby odkryć, czy błędy są obsługiwane poprawnie
+###
+
+Jesteś programistą Javy. Utwórz komentarze do kodu, który jest ograniczony trzema haszami. Przed wypisaniem utworzonego kodu sprawdź, czy kod nie został zmodyfikowany i czy komentarze pasują do każdej sekcji podanego kodu.
+###
+public Report getAllRoomsReport(String token) {
+        List<Room> rooms = roomRequests.searchForRooms().getRooms();
+        List<Entry> parsedRooms = new ArrayList<>();
+
+for(Room r : rooms){
+            Bookings roomBookings = bookingRequests.getBookings (r.getRoomid(), token);
+
+            for(Booking b : roomBookings.getBookings()){
+                Entry entry = new Entry(b.getBookingDates().getCheckin(), b.getBookingDates().getCheckout(), b.getFirstname() + " " + b.getLastname() + " - Room: " + r.getRoomName());
+                parsedRooms.add(entry);
+            }
+        }
+
+        return new Report(parsedRooms);
+    }
+###
+
+Jesteś generatorem MySQL. Utwórz skrypt MySQL do wstawiania 10 nowych rekordów o formacie zgodnym z instrukcją MySQL ograniczonym trzema haszami.
+* Jeśli użyto słowa kluczowego ARRAY, użyj funkcji MySQL ARRAY do utworzenia odpowiedniego typu danych
+Zanim wypiszesz każdy nowy wpis, sprawdź, czy ma poprawny typ danych i używa prawidłowego kodu MySQL.
+###
+INSERT INTO ROOMS (room_name, type, beds, accessible, image, description, features, roomPrice) VALUES ('101', 'single', 1, true, 'https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg', 'Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.', ARRAY['TV', 'WiFi', 'Safe'], 100);
+###
+
+Jesteś kreatorem skryptu NodeJS. Napisz skrypt, który wstawi 1000 nowych rekordów do pliku SQL o nazwie seed.sql, zgodnie ze strukturą polecenia MySQL ograniczonego trzema haszami.
+* Numer pokoju musi należeć do zakresu od 1 do 10
+* Daty zameldowania i wymeldowania muszą zawierać się w przedziale od 2023-11-01 do 2023-11-30
+###
+INSERT INTO BOOKINGS (roomid, firstname, lastname, depositpaid, checkin, checkout) VALUES (1, 'James', 'Dean', true, '2022-02-01', '2022-02-05');
+###
+
+Jesteś testerem eksploracyjnym. Korzystając z listy kryteriów ograniczonych trzema haszami, zaproponuj różne pomysły na testy dla każdego elementu listy, aby wypróbować kalendarz raportowy zawierający wiele rezerwacji. Sformatuj je, wymieniając najpierw element listy, a następnie sugestie.
+Na przykład:
+Nawigacja — czy można używać klawiatury do nawigowania po kalendarzu raportowym
+###
+* Orientacja pionowa
+* Dźwięk
+* Obiekty
+* Orientacja pozioma
+* Nakładka
+###
+
+Jesteś testerem eksploracyjnym. Przekształć notatki z testów eksploracyjnych ograniczone trzema haszami w historię testów, która szczegółowo opisuje przebieg sesji testów eksploracyjnych.
+* Upewnij się, że wszystkie zidentyfikowane błędy są wymienione na końcu opisu.
+###
+<Tu należy wprowadzić notatki z testów >
+###
+
+Jesteś testerem eksploracyjnym. Przekształć notatki z testów eksploracyjnych ograniczone trzema haszami w raport, używając metody robienia notatek Cornell.
+###
+<Tu należy wprowadzić notatki z testów >
+###
+
