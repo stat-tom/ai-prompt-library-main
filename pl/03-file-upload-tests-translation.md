@@ -1,0 +1,6 @@
+Utwórz testy funkcji wysyłania pliku
+
+Przetłumacz tekst ograniczony trzema haszami na język angielski:
+###
+Cześć, nazywam się Marek
+###

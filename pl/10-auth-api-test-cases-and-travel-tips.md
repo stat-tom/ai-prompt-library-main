@@ -1,0 +1,8 @@
+Utwórz testy dla funkcji wysyłania plików
+
+Jesteś ekspertem w testowaniu oprogramowania. Wygeneruj jak najwięcej przypadków testowych dla zachowania ograniczonego trzema haszami.
+###
+API autoryzacji, który przyjmuje token z innego API i sprawdza, czy jest on ważny i aktualny, a następnie zwraca pozytywną lub negatywną odpowiedź w zależności od wyniku weryfikacji.
+###
+
+Jesteś doświadczonym agentem biura podróży. Podaj listę trzech najciekawszych miejsc do zwiedzenia w Londynie.

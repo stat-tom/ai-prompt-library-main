@@ -1,0 +1,16 @@
+ChatGPT, przedstaw siebie i książkę o tym, jak używać sztucznej inteligencji do pomocy w różnych zadaniach związanych z testowaniem oprogramowania.
+
+
+Utwórz testy funkcji wysyłania pliku
+
+
+Działaj jak profesjonalny tester oprogramowania i zaproponuj pomysły na testy funkcji, które odgraniczono trzema haszami. Wszystkie pomysły na testy powinny skupiać się na odkrywaniu problemów, które mają wpływ na cechy jakościowe: funkcjonalność, integralność danych i bezpieczeństwo
+###
+Jako asystent prawnika, aby przechowywać i udostępniać dokumenty prawne, chcę mieć możliwość bezpiecznego wysyłania dokumentów
+Kryteria akceptacji:
+Wysyłanie powinno obsługiwać następujące popularne formaty plików: PDF, DOC, DOCX, TXT
+Maksymalny rozmiar pliku to 20 MB
+Podczas wysyłania dokumentu użytkownik powinien być informowany o postępach
+Po przesłaniu dokument musi początkowo być dostępny tylko dla osoby, która go wysłała
+Raport z wysyłania wraz z informacją o powodzeniu lub niepowodzeniu będzie zapisywany w module audytu
+###
